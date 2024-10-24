@@ -68,18 +68,52 @@ class Bank{
 		}
 		
 };
-class kalkulator {
+class Kalkulator {
 	private:
 		double liczba1;
 		double liczba2;
-		string znak;
+		char znak;
+		double wynik = 0;
 	public:
-		kalkulator(double _liczba1)
-		
-		void setLiczba1(double _liczba1){ liczba1 = _liczba1;		}
-		void setLiczba2(double _liczba2){ liczba2 = _liczba2;		}
-		void setZnak(string _znak){ znak = _znak		}
-		
+		//settery
+		void setLiczba1(double _liczba1){ liczba1 = _liczba1;}
+		void setLiczba2(double _liczba2){ liczba2 = _liczba2;}
+		void setZnak(char _znak){ znak = _znak;}
+		//konstruktor
+		Kalkulator (double _liczba1 = 0, double _liczba2 = 0, char _znak = '+'){
+                   liczba1 = _liczba1;
+                   liczba2 = _liczba2;
+                   znak = _znak;
+                   }
+		void licz(){
+		    switch(znak){
+		        case '+':
+		            wynik = liczba1 + liczba2;
+		            cout<<"Wynik: "<<wynik<<endl;
+		            break;
+		        case '-':
+		            wynik = wynik = liczba1 - liczba2;
+		            cout<<"Wynik: "<<wynik<<endl;
+		            break;
+		        case '*':
+		            wynik = liczba1 * liczba2;
+		            cout<<"Wynik: "<<wynik<<endl;
+		            break;
+		        case '/':
+		            if (liczba2 != 0){
+		                wynik = liczba1 / liczba2;
+		                cout<<"Wynik: "<<wynik<<endl;
+		            }
+		            else{ cout<<"liczba2 nie moze byc zerem"; }
+		            break;
+		            
+		        default:
+                    cout << "Nieznany operator: " << znak << endl;
+                    return;
+		      
+		    }
+		        
+		}
 };
 int main(){
 	Figura newFigura("Kolo",25.5,10);
@@ -89,11 +123,20 @@ int main(){
 	newFigura.showInf();
 	
 	Bank newkonta[10];
-	//Bank konto_0("Mykyta Korkishko",1234567890,1000000000);
-	newkonta[0] = Bank("Mykyta Korkishko","1234567890",1000000000);//konto_0.showInf();
+	
+	newkonta[0] = Bank("Mykyta Korkishko","1234567890",1000000000);
 	newkonta[0].showInf();
 	newkonta[1] = Bank("Don Kornison","1234");
 	newkonta[1].showInf();
 	
+	Kalkulator newKalkulator(1,2,'+');
+	newKalkulator.licz();
+	newKalkulator.setZnak('-');
+	newKalkulator.licz();
+	newKalkulator.setZnak('*');
+	newKalkulator.licz();
+	newKalkulator.setZnak('/');
+	newKalkulator.licz();
 	
+	return 0;
 }
